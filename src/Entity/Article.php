@@ -79,9 +79,10 @@ class Article
         return $this->image;
     }
 
-    public function setImage(string $image): void
+    public function setImage(string $image): self
     {
         $this->image = $image;
+        return $this;
     }
 
     public function getPublishedAt(): ?\DateTimeImmutable
