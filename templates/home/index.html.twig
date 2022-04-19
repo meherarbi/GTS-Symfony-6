@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+{% for user in users %}
+<h4>hello {{user.name}}! vous avez {{user.age}}!</h4>
+{% endfor %}
+{% endblock %}
