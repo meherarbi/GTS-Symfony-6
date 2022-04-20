@@ -18,6 +18,9 @@
         <tbody>
         {% for article in articles %}
             <tr>
+            <td><a href="{{ path('app_article_show', {id: article.id}) }}">
+                            <img src="{{ asset('uploads/' ~ article.image) }}" class="card-img-top" alt="{{ article.title }}">
+                        </a></td>
                 <td>{{ article.id }}</td>
                 <td>{{ article.title }}</td>
                 <td>{{ article.content }}</td>
