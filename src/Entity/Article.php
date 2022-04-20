@@ -7,6 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Category;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints\Count;
+use Symfony\Component\Validator\Constraints\Image;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article
@@ -37,6 +40,10 @@ class Article
     #[ORM\JoinTable(name: 'article_tags')]
     
     private Collection $tags;
+
+    #[Image(maxSize: '1M', maxRatio: 4/3, minRatio: 4/3)]
+    
+    private ?UploadedFile $imageFile = null;
 
     public function __construct()
     {
@@ -79,10 +86,9 @@ class Article
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(string $image): void
     {
         $this->image = $image;
-        return $this;
     }
 
     public function getPublishedAt(): ?\DateTimeImmutable
@@ -117,6 +123,16 @@ class Article
     public function setTags(Collection $tags): void
     {
         $this->tags = $tags;
+    }
+
+    public function getImageFile(): ?UploadedFile
+    {
+        return $this->imageFile;    
+    }
+
+    public function setImageFile(?UploadedFile $imageFile): void
+    {
+        $this->imageFile = $imageFile;
     }
 
    
