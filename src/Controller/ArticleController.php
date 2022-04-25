@@ -28,6 +28,7 @@ function index(ArticleRepository $articleRepository): Response
 #[Route('/new', name:'app_article_new', methods:['GET', 'POST'])]
 function new (Request $request, ArticleRepository $articleRepository, string $uploadDir, EntityManagerInterface $em): Response {
     $article = new Article();
+    
     $form = $this->createForm(ArticleType::class, $article);
     $form->handleRequest($request);
 
