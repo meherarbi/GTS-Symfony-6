@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Uid\Uuid;
 use Monolog\DateTimeImmutable;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 #[Route('/article')]
 class ArticleController extends AbstractController
@@ -26,8 +27,10 @@ function index(ArticleRepository $articleRepository): Response
 }
 
 #[Route('/new', name:'app_article_new', methods:['GET', 'POST'])]
+#[IsGranted('ROLE_USER')]
 function new (Request $request, ArticleRepository $articleRepository, string $uploadDir, EntityManagerInterface $em): Response {
     $article = new Article();
+    
     $form = $this->createForm(ArticleType::class, $article);
     $form->handleRequest($request);
 

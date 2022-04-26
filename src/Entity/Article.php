@@ -35,6 +35,10 @@ class Article
     #[ORM\JoinColumn(nullable: false)]
     private $category;
 
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private $user;
+
   
     #[ORM\ManyToMany(targetEntity: Tags::class)]
     #[ORM\JoinTable(name: 'article_tags')]
@@ -138,8 +142,12 @@ class Article
    
 
    
-
-   
-
-
+	function getUser() {
+		return $this->user;
+	}
+	
+	function setUser($user): self {
+		$this->user = $user;
+		return $this;
+	}
 }
