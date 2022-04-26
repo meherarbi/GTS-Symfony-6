@@ -6,7 +6,7 @@ use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Category;
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\Image;
@@ -32,12 +32,12 @@ class Article
     private $publishedAt;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'articles')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false,onDelete: 'CASCADE')]
     private $category;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
-    private $user;
+    private User $user;
 
   
     #[ORM\ManyToMany(targetEntity: Tags::class)]
