@@ -35,7 +35,7 @@ function new (Request $request, ArticleRepository $articleRepository, string $up
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
-        /* $articleRepository->add($article); */
+        $articleRepository->add($article);
         $article->setPublishedAt(new GlobalDateTimeImmutable ());
         $article->setImage(sprintf('%s.%s', Uuid::v4(), $article->getImageFile()->getClientOriginalExtension()));
         $article->getImageFile()->move($uploadDir, $article->getImage());

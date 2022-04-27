@@ -10,6 +10,7 @@ use App\Entity\User;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article
@@ -45,7 +46,8 @@ class Article
     
     private Collection $tags;
 
-    #[Image(maxSize: '1M', maxRatio: 4/3, minRatio: 4/3)]
+    #[Image()]
+    #[NotNull]
     
     private ?UploadedFile $imageFile = null;
 
